@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://c70utvn5axb7l"]
+
+[ext_resource type="Script" path="res://area_of_sight.gd" id="1_tuncm"]
+
+[node name="AreaOfSight" type="Node2D"]
+script = ExtResource("1_tuncm")
+edge_color = Color(0, 0, 0, 1)
+edge_width = 1.0
