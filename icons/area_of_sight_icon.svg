@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg id="master-artboard" viewBox="0 0 800 800" version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" style="enable-background:new 0 0 1400 980;" width="800px" height="800px"><defs><style id="ee-google-fonts">@import url(https://fonts.googleapis.com/css?family=Rubik:300,300italic,400,400italic,500,500italic,700,700italic,900,900italic);</style><radialGradient id="gradient-0" gradientUnits="objectBoundingBox" cx="0.5" cy="0.5" r="0.5" gradientTransform="matrix(0.9999585073152404, 0.009034438880092921, -0.008426263852619575, 0.9325883675727624, 0.0042339041332019045, 0.029188579450547536)">
+                <stop offset="0" style="stop-color: #1500ff"/>
+                <stop offset="1" style="stop-color: #0d0099"/>
+              </radialGradient><radialGradient id="gradient-1" gradientUnits="objectBoundingBox" cx="0.39721935987472534" cy="0.9684334397315979" r="0.5" gradientTransform="matrix(-1.51608045255567, 0.9964517952824856, -1.2067312364499898, -2.260627767437068, 2.553191391192078, 2.243797856041667)">
+                <stop offset="0" style="stop-color: #54d6a0"/>
+                <stop offset="1" style="stop-color: #269e6c"/>
+              </radialGradient></defs><rect id="ee-background" x="0" y="0" width="800" height="800" style="fill: white; fill-opacity: 0; pointer-events: none;"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<g transform="matrix(6.498148918151855, 3.7517075538635254, -3.7517075538635254, 6.498148918151855, -1260.0950257713437, -4046.0958095950773)"><g id="g-11" transform="matrix(1, 0, 0, 1, 0, 0)">
+	<path class="st0" d="M509.4,349.5c-4.1-7.2-10.8-7.2-14.9,0L459.4,411c-4.1,7.2-0.7,13,7.6,13h70c8.2,0,11.7-5.9,7.6-13&#10;&#9;&#9;L509.4,349.5z" style="fill: url('#gradient-1'); stroke: rgb(214, 203, 207); stroke-opacity: 0; fill-opacity: 0.81;"/>
+</g></g><g transform="matrix(1.9428162574768064, 0, 0, 1.9428162574768064, -1125.4683837890623, -1210.4157714843748)"><g id="g-9" transform="matrix(1, 0, 0, 1, 0, 0)">
+	<g id="g-10">
+		<g>
+			<path class="st0" d="M654,884c-29.2,0-53-23.8-53-53s23.8-53,53-53s53,23.8,53,53S683.2,884,654,884z M654,784&#10;&#9;&#9;&#9;&#9;c-25.9,0-47,21.1-47,47s21.1,47,47,47s47-21.1,47-47S679.9,784,654,784z" style="fill: rgb(0, 213, 114); fill-opacity: 0; stroke: rgb(203, 214, 209); stroke-width: 25;"/>
+		</g>
+	</g>
+</g></g><g transform="matrix(1.9428162574768064, 0, 0, 1.9428162574768064, -1125.5328369140623, -1210.222412109375)"><g id="g-7" transform="matrix(1, 0, 0, 1, 0, 0)">
+	<g id="g-8">
+		<g>
+			<path class="st0" d="M654,884c-29.2,0-53-23.8-53-53s23.8-53,53-53s53,23.8,53,53S683.2,884,654,884z M654,784&#10;&#9;&#9;&#9;&#9;c-25.9,0-47,21.1-47,47s21.1,47,47,47s47-21.1,47-47S679.9,784,654,784z" style="fill: rgb(0, 213, 114); fill-opacity: 0; stroke: rgb(0, 213, 114); stroke-width: 19;"/>
+		</g>
+	</g>
+</g></g></svg>

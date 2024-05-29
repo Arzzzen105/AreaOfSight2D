@@ -20,8 +20,6 @@ collision_mask = 0
 script = ExtResource("1_x0hko")
 parent_node = NodePath("..")
 radius = 7
-target_points_amount = null
-debug_color = null
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_b02m1")

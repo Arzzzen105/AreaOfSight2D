@@ -1,10 +1,17 @@
 @tool
-
+@icon("res://icons/area_of_sight_icon.svg")
+class_name AreaOfSight 
 extends Node2D
 
 ## A node for a procedurally generated area of sight (usually cone of sight). [br]
-## WARNING: [AreaOfSight] does NOT track [Area2D]s and other [CollisionObject2D]s! Use [AreaOfSightAgent] instead.
-class_name AreaOfSight
+## [AreaOfSight] [b]does NOT[/b] track [Area2D]s and other [CollisionObject2D]s! [b]Use [AreaOfSightAgent] instead.[/b][br]
+## [i]Avoid fast rotating of the parent node to avoid bugs. Use [method @GlobalScope.lerp_angle] for rotating.[/i][br]
+## WARNING: DO NOT CHANGE VARIABLES AND CALL MATHODS THAT STARTS WITH AN UNDERSCOPE!
+
+## Emitted when the [AreaOfSightAgent] of [param node] enters the [AreaOfSight].
+signal node_entered_area(node : Node2D)
+## Emitted when the [AreaOfSightAgent] of [param node] exits the [AreaOfSight].
+signal node_exited_area(node : Node2D)
 
 @export_group("Vision")
 
@@ -40,7 +47,7 @@ class_name AreaOfSight
 ## The layers of AreaOfSightAgents that the AreaOfSight will track. Usually a player.
 @export_flags_2d_physics var tracking_agents_mask = 0 : set = _update_tracking_mask
 
-## Add the parent's AreaOfSightAgent here to avoid selftracking
+## Add the parent's AreaOfSightAgent here to avoid selftracking.
 @export var _parent_agent : AreaOfSightAgent
 
 @export_group("Colors")
@@ -62,11 +69,6 @@ var edge_color : Color : set = _update_edge_color
 
 ## Width of the edge of the area. Ignore if show_edge is disabled.
 var edge_width : float = 1 : set = _update_edge_width
-
-## Emitted when the [AreaOfSightAgent] of [param node] enters the [AreaOfSight].
-signal node_entered_area(node : Node2D)
-## Emitted when the [AreaOfSightAgent] of [param node] exits the [AreaOfSight].
-signal node_exited_area(node : Node2D)
 
 ## Private [Polygon2D] that draws the area.
 var _area_polygon : Polygon2D = Polygon2D.new()
@@ -100,6 +102,25 @@ var _agents_in_reach_area : Array[AreaOfSightAgent] = []
 ## An [Array] of [Node2D]s that are seen by the [AreaOfSight]. Updated in [method AreaOfSight._check_collisions].
 var _nodes_in_area_of_sight : Array[Node2D] = []
 
+# Initialization of the scene
+func _ready() -> void:
+	
+	await get_tree().physics_frame
+	
+	_setup_scene()
+	_set_points()
+	_redraw()
+	_check_collisions()
+
+@warning_ignore("unused_parameter")
+func _process(delta : float) -> void:
+	_redraw()
+
+@warning_ignore("unused_parameter")
+func _physics_process(delta : float) -> void:
+	_set_points()
+	_check_collisions()
+
 # Method to add edge_color and member to the editor inspector
 # when [param show_edge] is enabled.
 func _get_property_list():
@@ -124,22 +145,7 @@ func _get_property_list():
 	
 	return result
 
-# Initialization of the scene
-func _ready() -> void:
-	
-	await get_tree().physics_frame
-	
-	_setup_scene()
-	_set_points()
-	_redraw()
-	_check_collisions()
-
-func _process(delta : float) -> void:
-	_set_points()
-	_redraw()
-
-func _physics_process(delta : float) -> void:
-	_check_collisions()
+#region draw methods
 
 ## Redraws the area using [method AreaOfSight._redraw_polygon] and [method AreaOfSight._redraw_edge].
 func _redraw() -> void:
@@ -157,31 +163,28 @@ func _redraw_polygon() -> void:
 func _redraw_edge() -> void:
 	_edge.points = _polygon_points
 
+#endregion
+
+#region collision methods
+
 ## Set [member AreaOfSight._polygon_points] using [method AreaOfSight._ray_to].
 func _set_points() -> void:
 	var result : PackedVector2Array = []
-	if angle_deg < 360:
+	var it = -1
+	if angle_deg <  360:
 		result.append(Vector2.ZERO)
+		it = 1
 		
-	for i in range(rays_amount + 1):
+	for i in range(rays_amount + it):
 		var point : Vector2 = _ray_to(
 			to_global(Vector2(radius, 0).rotated(rotation - _semiangle + i * _angle_step))
 		)
 		result.append(to_local(point))
 		
+	if it == 0:
+		result.append(result[0])
 	_polygon_points = result
 
-## Adds an [param agent] to [member AreaOfSight._agents_in_reach_area].
-func _add_to_reach_area_list(agent : Area2D) -> void:
-	if agent is AreaOfSightAgent and agent != _parent_agent:
-		if not agent in _agents_in_reach_area:
-			_agents_in_reach_area.append(agent)
-
-## Removes an [param agent] from [member AreaOfSight._agents_in_reach_area].
-func _remove_from_reach_area_list(agent : Area2D) -> void:
-	if agent is AreaOfSightAgent and agent != _parent_agent:
-		if agent in _agents_in_reach_area:
-			_agents_in_reach_area.erase(agent)
 
 ## Returns the coordinates of a ray collision position from [member Node2D.global_position]
 ## of [AreaOfSight] to [Vector2] [param to]. If there's no collision, then returns [param to].
@@ -202,6 +205,7 @@ func _ray_to(to : Vector2) -> Vector2:
 	else:
 		return to
 
+
 ## Iterates over all [AreaOfSight] in the reach area and applies [method AreaOfSight.sees_agent]
 ## to them to update the [member AreaOfSight._nodes_in_area_of_sight]. [br]
 ## If some agent has just entered the AOS, then emits [signal AreaOfSight.node_entered_area].
@@ -209,18 +213,33 @@ func _ray_to(to : Vector2) -> Vector2:
 func _check_collisions() -> void:
 	for agent in _agents_in_reach_area:
 		
-		var sees_agent = sees_agent(agent)
+		var see_agent = sees_agent(agent)
 		var node = agent.parent_node
 		
 		if not node:
 			continue
 			
-		if (sees_agent) and (not node in _nodes_in_area_of_sight):
+		if (see_agent) and (not node in _nodes_in_area_of_sight):
 			_nodes_in_area_of_sight.append(node)
 			node_entered_area.emit(node)
-		elif (not sees_agent) and (node in _nodes_in_area_of_sight):
+		elif (not see_agent) and (node in _nodes_in_area_of_sight):
 			_nodes_in_area_of_sight.erase(node)
 			node_exited_area.emit(node)
+
+
+## Adds an [param agent] to [member AreaOfSight._agents_in_reach_area].
+func _add_to_reach_area_list(agent : Area2D) -> void:
+	if agent is AreaOfSightAgent and agent != _parent_agent:
+		if not agent in _agents_in_reach_area:
+			_agents_in_reach_area.append(agent)
+
+
+## Removes an [param agent] from [member AreaOfSight._agents_in_reach_area].
+func _remove_from_reach_area_list(agent : Area2D) -> void:
+	if agent is AreaOfSightAgent and agent != _parent_agent:
+		if agent in _agents_in_reach_area:
+			_agents_in_reach_area.erase(agent)
+
 
 ## Returns [code]true[/code] if the [param agent] is seen by the [AreaOfSight] at the moment.
 ## Uses [member AreaOfSightAgent.target_points] to calculate.
@@ -234,14 +253,15 @@ func sees_agent(agent : AreaOfSightAgent) -> bool:
 	
 	return false
 
+
 ## Returns the [Array] of [Node]s whose [AreaOfSightAgent]s are in the [AreaOfSight] at the moment.
 func get_spotted_nodes() -> Array[Node2D]:
 	return _nodes_in_area_of_sight
 
-#################################
-#     Setters and getters.      #
-# Also some intializing methods.#
-#################################
+#endregion
+
+#region init methods, setgets
+
 
 func _setup_scene() -> void:
 	
@@ -258,6 +278,7 @@ func _setup_scene() -> void:
 	
 	_update_scene_props()
 
+
 func _update_scene_props() -> void:
 	_update_angle_params()
 	_update_area_color(area_color)
@@ -269,43 +290,56 @@ func _update_scene_props() -> void:
 	_update_debug_color(debug_color)
 	_update_visibility_in_editor(show_reach_area_in_editor)
 
+
 func _update_angle_params() -> void:
 	_angle_rad = deg_to_rad(angle_deg)
 	_semiangle = _angle_rad / 2
 	_update_angle_step()
 
+
 func _update_angle_step() -> void:
 	_angle_step = _angle_rad / rays_amount
+
 
 func _update_area_color(new_col : Color) -> void:
 	area_color = new_col
 	_area_polygon.color = new_col
+
 
 func _update_area_texture(new_text : Texture2D) -> void:
 	if new_text:
 		area_texture = new_text
 		_area_polygon.texture = new_text
 
+
 func _update_edge_color(new_col : Color) -> void:
 	edge_color = new_col
 	_edge.default_color = new_col
-	
+
+
 func _update_edge_width(new_width : float) -> void:
 	edge_width = new_width
 	_edge.width = new_width
+
 
 func _update_tracking_mask(new_bitmask : int) -> void:
 	tracking_agents_mask = new_bitmask
 	_detecting_area.collision_mask = new_bitmask
 
+
 func _update_radius(new_raduis : int) -> void:
 	radius = new_raduis
 	_detecting_cirlce_shape.radius = new_raduis
+
 
 func _update_debug_color(new_col : Color):
 	debug_color = new_col
 	_detecting_shape.debug_color = debug_color
 	
+
 func _update_visibility_in_editor(new_val : bool):
 	show_reach_area_in_editor = new_val
 	_detecting_shape.visible = new_val
+
+
+#endregion

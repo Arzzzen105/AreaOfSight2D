@@ -13,7 +13,7 @@ colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.443137)
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_c2suf"]
 gradient = SubResource("Gradient_q3j2e")
 
-[node name="Enemy" type="CharacterBody2D"]
+[node name="Enemy" type="CharacterBody2D" groups=["enemy"]]
 z_index = 2
 z_as_relative = false
 collision_layer = 2
@@ -25,6 +25,7 @@ color = Color(1, 0, 0, 1)
 polygon = PackedVector2Array(0, -8, 6, -6, 8, 0, 6, 6, 0, 8, -6, 6, -8, 0, -6, -6)
 
 [node name="CollisionPolygon2D" type="CollisionShape2D" parent="."]
+modulate = Color(0, 0.835294, 0.447059, 1)
 shape = SubResource("CircleShape2D_cqe7j")
 debug_color = Color(0, 0.6, 0.701961, 0.419608)
 
