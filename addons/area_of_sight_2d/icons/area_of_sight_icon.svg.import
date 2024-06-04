@@ -2,16 +2,17 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dx2oqjlbit6c1"
-path="res://.godot/imported/icon.svg-141c43adf3f34b5497531231ea7ddc08.ctex"
+uid="uid://v7yixwg335le"
+path="res://.godot/imported/area_of_sight_icon.svg-e6ab451b70178848272130f7fe7312ed.ctex"
 metadata={
+"has_editor_variant": true,
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/area_of_sight/icon.svg"
-dest_files=["res://.godot/imported/icon.svg-141c43adf3f34b5497531231ea7ddc08.ctex"]
+source_file="res://addons/area_of_sight_2d/icons/area_of_sight_icon.svg"
+dest_files=["res://.godot/imported/area_of_sight_icon.svg-e6ab451b70178848272130f7fe7312ed.ctex"]
 
 [params]
 
@@ -33,5 +34,5 @@ process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
 svg/scale=1.0
-editor/scale_with_editor_scale=false
-editor/convert_colors_with_editor_theme=false
+editor/scale_with_editor_scale=true
+editor/convert_colors_with_editor_theme=true

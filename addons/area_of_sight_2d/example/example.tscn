@@ -1,10 +1,10 @@
 [gd_scene load_steps=13 format=3 uid="uid://dorm3frvsgue0"]
 
-[ext_resource type="Script" path="res://addons/area_of_sight/example/example.gd" id="1_uh06u"]
-[ext_resource type="PackedScene" uid="uid://dpdo8ewbwemm5" path="res://addons/area_of_sight/example/player.tscn" id="1_uo4x6"]
-[ext_resource type="Texture2D" uid="uid://4tb67ngrwk10" path="res://addons/area_of_sight/example/tileset.png" id="2_6pyyf"]
-[ext_resource type="PackedScene" uid="uid://xb1jt6auy873" path="res://addons/area_of_sight/example/enemy.tscn" id="3_7jxwg"]
-[ext_resource type="Script" path="res://addons/area_of_sight/example/AnimationPlayer.gd" id="4_k2qgo"]
+[ext_resource type="Script" path="res://addons/area_of_sight_2d/example/example.gd" id="1_uh06u"]
+[ext_resource type="PackedScene" uid="uid://dpdo8ewbwemm5" path="res://addons/area_of_sight_2d/example/player.tscn" id="1_uo4x6"]
+[ext_resource type="Texture2D" uid="uid://4tb67ngrwk10" path="res://addons/area_of_sight_2d/example/tileset.png" id="2_6pyyf"]
+[ext_resource type="PackedScene" uid="uid://xb1jt6auy873" path="res://addons/area_of_sight_2d/example/enemy.tscn" id="3_7jxwg"]
+[ext_resource type="Script" path="res://addons/area_of_sight_2d/example/enemy_movement.gd" id="4_k2qgo"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_61mx8"]
 texture = ExtResource("2_6pyyf")

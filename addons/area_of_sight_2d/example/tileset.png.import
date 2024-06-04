@@ -2,17 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://v7yixwg335le"
-path="res://.godot/imported/area_of_sight_icon.svg-42846b9e2ee56d69b15ecd54e4959b39.ctex"
+uid="uid://4tb67ngrwk10"
+path="res://.godot/imported/tileset.png-2566057a2c0569f19632d3172ad1c066.ctex"
 metadata={
-"has_editor_variant": true,
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/area_of_sight/icons/area_of_sight_icon.svg"
-dest_files=["res://.godot/imported/area_of_sight_icon.svg-42846b9e2ee56d69b15ecd54e4959b39.ctex"]
+source_file="res://addons/area_of_sight_2d/example/tileset.png"
+dest_files=["res://.godot/imported/tileset.png-2566057a2c0569f19632d3172ad1c066.ctex"]
 
 [params]
 
@@ -33,6 +32,3 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
-svg/scale=1.0
-editor/scale_with_editor_scale=true
-editor/convert_colors_with_editor_theme=true

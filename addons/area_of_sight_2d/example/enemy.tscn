@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://xb1jt6auy873"]
 
-[ext_resource type="Script" path="res://addons/area_of_sight/area_of_sight.gd" id="1_h6l5p"]
-[ext_resource type="Script" path="res://addons/area_of_sight/example/enemy.gd" id="1_ow4b1"]
+[ext_resource type="Script" path="res://addons/area_of_sight_2d/area_of_sight_2d.gd" id="1_h6l5p"]
+[ext_resource type="Script" path="res://addons/area_of_sight_2d/example/enemy.gd" id="1_ow4b1"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cqe7j"]
 radius = 7.0
@@ -29,7 +29,7 @@ modulate = Color(0, 0.835294, 0.447059, 1)
 shape = SubResource("CircleShape2D_cqe7j")
 debug_color = Color(0, 0.6, 0.701961, 0.419608)
 
-[node name="AreaOfSight" type="Node2D" parent="."]
+[node name="AreaOfSight2D" type="Node2D" parent="."]
 z_as_relative = false
 script = ExtResource("1_h6l5p")
 radius = 112
@@ -42,5 +42,5 @@ area_texture = SubResource("GradientTexture1D_c2suf")
 edge_color = Color(0, 0, 0, 1)
 edge_width = 1.0
 
-[connection signal="node_entered_area" from="AreaOfSight" to="." method="_on_area_of_sight_node_entered_area"]
-[connection signal="node_exited_area" from="AreaOfSight" to="." method="_on_area_of_sight_node_exited_area"]
+[connection signal="node_entered_area" from="AreaOfSight2D" to="." method="_on_area_of_sight_node_entered_area"]
+[connection signal="node_exited_area" from="AreaOfSight2D" to="." method="_on_area_of_sight_node_exited_area"]

@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bh4g4dmfstkcv"
-path="res://.godot/imported/addon_icon.svg-688c8ade83279c705324bdf01a226266.ctex"
+uid="uid://ccynb2fk6e6w4"
+path="res://.godot/imported/area_of_sight_agent_icon.svg-d8b65db9463ab6e600f96f0abf47da40.ctex"
 metadata={
 "has_editor_variant": true,
 "vram_texture": false
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://addons/area_of_sight/icons/addon_icon.svg"
-dest_files=["res://.godot/imported/addon_icon.svg-688c8ade83279c705324bdf01a226266.ctex"]
+source_file="res://addons/area_of_sight_2d/icons/area_of_sight_agent_icon.svg"
+dest_files=["res://.godot/imported/area_of_sight_agent_icon.svg-d8b65db9463ab6e600f96f0abf47da40.ctex"]
 
 [params]
 

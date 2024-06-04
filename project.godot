@@ -11,10 +11,10 @@ config_version=5
 [application]
 
 config/name="AreaOfVision"
-run/main_scene="res://addons/area_of_sight/example/example.tscn"
+run/main_scene="res://addons/area_of_sight_2d/example/example.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 boot_splash/show_image=false
-config/icon="res://addons/area_of_sight/icon.svg"
+config/icon="res://addons/area_of_sight_2d/icons/addon_icon.png"
 
 [layer_names]
 

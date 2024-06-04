@@ -1,7 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://basb2gmh524m6"]
-
-[ext_resource type="Script" path="res://addons/area_of_sight/area_of_sight_agent.gd" id="1_vp1an"]
-
-[node name="AreaOfSightAgent" type="Area2D"]
-collision_mask = 0
-script = ExtResource("1_vp1an")
