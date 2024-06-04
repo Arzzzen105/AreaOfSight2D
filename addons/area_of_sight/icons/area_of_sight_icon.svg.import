@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://v7yixwg335le"
-path="res://.godot/imported/area_of_sight_icon.svg-447c549a84fa9cba0b33cdb29892b259.ctex"
+path="res://.godot/imported/area_of_sight_icon.svg-42846b9e2ee56d69b15ecd54e4959b39.ctex"
 metadata={
 "has_editor_variant": true,
 "vram_texture": false
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://icons/area_of_sight_icon.svg"
-dest_files=["res://.godot/imported/area_of_sight_icon.svg-447c549a84fa9cba0b33cdb29892b259.ctex"]
+source_file="res://addons/area_of_sight/icons/area_of_sight_icon.svg"
+dest_files=["res://.godot/imported/area_of_sight_icon.svg-42846b9e2ee56d69b15ecd54e4959b39.ctex"]
 
 [params]
 

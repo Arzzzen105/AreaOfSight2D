@@ -1,5 +1,5 @@
 @tool
-@icon("res://icons/area_of_sight_agent.svg")
+@icon("res://addons/area_of_sight_2d/icons/area_of_sight_agent.svg")
 class_name AreaOfSightAgent extends Area2D
 
 ## A node tracked by [AreaOfSight]. [br]

@@ -1,11 +1,10 @@
 @tool
-@icon("res://icons/area_of_sight_icon.svg")
-class_name AreaOfSight 
-extends Node2D
+@icon("res://addons/area_of_sight_2d/icons/area_of_sight_icon.svg")
+
+class_name AreaOfSight extends Node2D
 
 ## A node for a procedurally generated area of sight (usually cone of sight). [br]
 ## [AreaOfSight] [b]does NOT[/b] track [Area2D]s and other [CollisionObject2D]s! [b]Use [AreaOfSightAgent] instead.[/b][br]
-## [i]Avoid fast rotating of the parent node to avoid bugs. Use [method @GlobalScope.lerp_angle] for rotating.[/i][br]
 ## WARNING: DO NOT CHANGE VARIABLES AND CALL MATHODS THAT STARTS WITH AN UNDERSCOPE!
 
 ## Emitted when the [AreaOfSightAgent] of [param node] enters the [AreaOfSight].
@@ -121,7 +120,7 @@ func _physics_process(delta : float) -> void:
 	_set_points()
 	_check_collisions()
 
-# Method to add edge_color and member to the editor inspector
+# Method that adds edge_color to the editor inspector
 # when [param show_edge] is enabled.
 func _get_property_list():
 	var result : Array[Dictionary] = []
