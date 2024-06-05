@@ -128,9 +128,9 @@ position = Vector2(272, 128)
 rotation = -3.14159
 follow_node = NodePath("../PathFollow")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="Interface" type="CanvasLayer" parent="."]
 
-[node name="Control" type="Control" parent="CanvasLayer"]
+[node name="Control" type="Control" parent="Interface"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -138,7 +138,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control"]
+[node name="MarginContainer" type="MarginContainer" parent="Interface/Control"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -149,22 +149,22 @@ theme_override_constants/margin_left = 8
 theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 800
 
-[node name="Sliders" type="VBoxContainer" parent="CanvasLayer/Control/MarginContainer"]
+[node name="Sliders" type="VBoxContainer" parent="Interface/Control/MarginContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="CanvasLayer/Control/MarginContainer/Sliders"]
+[node name="Label" type="Label" parent="Interface/Control/MarginContainer/Sliders"]
 layout_mode = 2
 text = "Use arrows to move."
 
-[node name="Radius" type="HBoxContainer" parent="CanvasLayer/Control/MarginContainer/Sliders"]
+[node name="Radius" type="HBoxContainer" parent="Interface/Control/MarginContainer/Sliders"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="CanvasLayer/Control/MarginContainer/Sliders/Radius"]
+[node name="Label" type="Label" parent="Interface/Control/MarginContainer/Sliders/Radius"]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Radius"
 
-[node name="Slider" type="HSlider" parent="CanvasLayer/Control/MarginContainer/Sliders/Radius"]
+[node name="Slider" type="HSlider" parent="Interface/Control/MarginContainer/Sliders/Radius"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -172,15 +172,15 @@ min_value = 10.0
 max_value = 256.0
 value = 96.0
 
-[node name="Angle" type="HBoxContainer" parent="CanvasLayer/Control/MarginContainer/Sliders"]
+[node name="Angle" type="HBoxContainer" parent="Interface/Control/MarginContainer/Sliders"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="CanvasLayer/Control/MarginContainer/Sliders/Angle"]
+[node name="Label" type="Label" parent="Interface/Control/MarginContainer/Sliders/Angle"]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Angle"
 
-[node name="Slider" type="HSlider" parent="CanvasLayer/Control/MarginContainer/Sliders/Angle"]
+[node name="Slider" type="HSlider" parent="Interface/Control/MarginContainer/Sliders/Angle"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -188,5 +188,5 @@ min_value = 10.0
 max_value = 360.0
 value = 135.0
 
-[connection signal="value_changed" from="CanvasLayer/Control/MarginContainer/Sliders/Radius/Slider" to="." method="_on_slider_value_changed"]
-[connection signal="value_changed" from="CanvasLayer/Control/MarginContainer/Sliders/Angle/Slider" to="." method="_on_angle_slider_value_changed"]
+[connection signal="value_changed" from="Interface/Control/MarginContainer/Sliders/Radius/Slider" to="." method="_on_slider_value_changed"]
+[connection signal="value_changed" from="Interface/Control/MarginContainer/Sliders/Angle/Slider" to="." method="_on_angle_slider_value_changed"]

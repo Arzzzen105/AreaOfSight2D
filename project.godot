@@ -16,6 +16,10 @@ config/features=PackedStringArray("4.2", "GL Compatibility")
 boot_splash/show_image=false
 config/icon="res://addons/area_of_sight_2d/icons/addon_icon.png"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/area_of_sight_2d/plugin.cfg")
+
 [layer_names]
 
 2d_physics/layer_1="Player"

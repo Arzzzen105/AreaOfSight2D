@@ -1,4 +1,5 @@
 @tool
+@icon("res://addons/area_of_sight_2d/icons/area_of_sight_agent_icon.svg")
 class_name AreaOfSightAgent2D extends Area2D
 
 ## A node tracked by [AreaOfSight2D]. [br]
@@ -33,7 +34,7 @@ func _ready() -> void:
 	_setup_scene()
 	_update_radius(radius)
 
-## Updates the value of [member AreaOfSightAgent2D.target_points].
+# Updates the value of [member AreaOfSightAgent2D.target_points].
 func _set_target_points():
 	target_points.clear()
 	

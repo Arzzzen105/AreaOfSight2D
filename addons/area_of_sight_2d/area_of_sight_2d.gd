@@ -1,4 +1,5 @@
 @tool
+@icon("res://addons/area_of_sight_2d/icons/area_of_sight_icon.svg")
 class_name AreaOfSight2D extends Node2D
 
 ## A node for a procedurally generated area of sight (usually cone of sight). [br]
@@ -12,16 +13,16 @@ signal node_exited_area(node : Node2D)
 
 @export_group("Vision")
 
-## Max distance that AreaOfSight2D can reach.
+## Max distance that [AreaOfSight2D] can reach.
 @export_range(0, 256, 8, "or_greater") var radius : int = 80 : set = _update_radius
 
-## AreaOfSight2D's angle of view.
+## [AreaOfSight2D]'s angle of view.
 @export_range(0, 360, 5, "or_greater") var angle_deg : int = 90: 
 	set(new_val):
 		angle_deg = new_val
 		_update_angle_params()
 
-## Amount of rays that AreaOfSight2D uses to render the polygon.
+## Amount of rays that [AreaOfSight2D] uses to render the polygon.
 ## The smaller the value, the faster the render will happen and the worse the accuracy of detection will be.
 @export_range(2, 360, 1, "or_greater") var rays_amount : int = 90: 
 	set(new_val):
@@ -41,18 +42,18 @@ signal node_exited_area(node : Node2D)
 ## The layers that rays of the area polygon will track. Usually a wall and obstacles.
 @export_flags_2d_physics var obstacle_mask = 0
 
-## The layers of AreaOfSightAgent2Ds that the AreaOfSight2D will track. Usually a player.
+## The layers of [AreaOfSightAgent2D]s that the AreaOfSight2D will track. Usually a player.
 @export_flags_2d_physics var tracking_agents_mask = 0 : set = _update_tracking_mask
 
-## Add the parent's AreaOfSightAgent2D here to avoid selftracking.
-@export var _parent_agent : AreaOfSightAgent2D
+## Add the parent's [AreaOfSightAgent2D] here to avoid selftracking. Ignore if parent doesn't have own [AreaOfSightAgent2D].
+@export var parent_agent : AreaOfSightAgent2D
 
 @export_group("Colors")
 
 ## Color of the area polygon.
-@export var area_color : Color = Color(1, 0, 0, 0.4): set = _update_area_color
+@export var area_color : Color : set = _update_area_color
 
-## Texture of area polygon. Usually used as GradientTexture1D.
+## Texture of area polygon. Usually used as [GradientTexture1D].
 @export var area_texture : Texture2D : set = _update_area_texture
 
 ## The edge of the area polygon will be drawn if enabled.
@@ -61,28 +62,28 @@ signal node_exited_area(node : Node2D)
 		show_edge = new_value
 		notify_property_list_changed()
 
-## The color of the edge. Ignore if show_edge is disabled.
+# The color of the edge. Ignore if show_edge is disabled.
 var edge_color : Color : set = _update_edge_color
 
-## Width of the edge of the area. Ignore if show_edge is disabled.
+# Width of the edge of the area. Ignore if show_edge is disabled.
 var edge_width : float = 1 : set = _update_edge_width
 
-## Private [Polygon2D] that draws the area.
+# Private Polygon2D that draws the area.
 var _area_polygon : Polygon2D = Polygon2D.new()
 
-## Private [Line2D] that draws the edge of the area. Will not be shown if [member AreaOfSight2D.show_edge] is disabled.
+# Private Line2D that draws the edge of the area. Will not be shown if member AreaOfSight2D.show_edge is disabled.
 var _edge : Line2D = Line2D.new()
 
-## Private [Area2D] used to storage all the [AreaOfSightAgent2D]s 
-## that are in the distanse of [member AreaOfSight2D.radius] to the [AreaOfSight2D]. [br]
-## [signal Area2D.area_entered] and [signal Area2D.area_entered] are connected to 
-## [method AreaOfSight2D._add_to_reach_area_list] and [method AreaOfSight2D._remove_from_reach_area_list].
+# Private Area2D used to storage all the AreaOfSightAgent2Ds 
+# that are in the distanse of member AreaOfSight2D.radius to the AreaOfSight2D. 
+# signal Area2D.area_entered and signal Area2D.area_entered are connected to 
+# method AreaOfSight2D._add_to_reach_area_list and method AreaOfSight2D._remove_from_reach_area_list.
 var _detecting_area : Area2D = Area2D.new()
 
-## Private [CollisionShape2D] to setup the [member AreaOfSight2D._detecting_area].
+# Private CollisionShape2D to setup the member AreaOfSight2D._detecting_area.
 var _detecting_shape : CollisionShape2D = CollisionShape2D.new()
 
-## Private [CircleShape2D] to setup the [member AreaOfSight2D._detecting_shape].
+# Private CircleShape2D to setup the member AreaOfSight2D._detecting_shape.
 var _detecting_cirlce_shape : CircleShape2D = CircleShape2D.new()
 
 # Variables for working with angles in radians. Updated when angle_deg is changed
@@ -90,13 +91,13 @@ var _angle_rad : float
 var _semiangle : float
 var _angle_step : float
 
-## A [PackedVector2Array] of points that are used to draw the AreaOfSight2D. Updated in [method AreaOfSight2D._set_points].
+# A PackedVector2Array of points that are used to draw the AreaOfSight2D. Updated in [method AreaOfSight2D._set_points].
 var _polygon_points : PackedVector2Array = []
 
-## An [Array] of [AreaOfSightAgent2D]s that area in [member AreaOfSight2D._detecting_area].
+# An Array of AreaOfSightAgent2Ds that area in member AreaOfSight2D._detecting_area.
 var _agents_in_reach_area : Array[AreaOfSightAgent2D] = []
 
-## An [Array] of [Node2D]s that are seen by the [AreaOfSight2D]. Updated in [method AreaOfSight2D._check_collisions].
+# An Array of Node2Ds that are seen by the AreaOfSight2D. Updated in method AreaOfSight2D._check_collisions.
 var _nodes_in_area_of_sight : Array[Node2D] = []
 
 # Initialization of the scene
@@ -119,7 +120,7 @@ func _physics_process(delta : float) -> void:
 	_check_collisions()
 
 # Method that adds edge_color to the editor inspector
-# when [param show_edge] is enabled.
+# when param show_edge is enabled.
 func _get_property_list():
 	var result : Array[Dictionary] = []
 	var usage = PROPERTY_USAGE_NO_EDITOR
@@ -144,7 +145,7 @@ func _get_property_list():
 
 #region draw methods
 
-## Redraws the area using [method AreaOfSight2D._redraw_polygon] and [method AreaOfSight2D._redraw_edge].
+# Redraws the area using method AreaOfSight2D._redraw_polygon and method AreaOfSight2D._redraw_edge.
 func _redraw() -> void:
 	_redraw_polygon()
 	if show_edge:
@@ -152,11 +153,11 @@ func _redraw() -> void:
 	else:
 		_edge.points = []
 
-## Redraws the area.
+# Redraws the area.
 func _redraw_polygon() -> void:
 	_area_polygon.polygon = _polygon_points
 
-## Redraws the edge of the area. Ignored when [member AreaOfSight2D.show_edge] is disabled.
+# Redraws the edge of the area. Ignored when member AreaOfSight2D.show_edge is disabled.
 func _redraw_edge() -> void:
 	_edge.points = _polygon_points
 
@@ -164,7 +165,7 @@ func _redraw_edge() -> void:
 
 #region collision methods
 
-## Set [member AreaOfSight2D._polygon_points] using [method AreaOfSight2D._ray_to].
+# Set member AreaOfSight2D._polygon_points using method AreaOfSight2D._ray_to.
 func _set_points() -> void:
 	var result : PackedVector2Array = []
 	var it = -1
@@ -183,9 +184,9 @@ func _set_points() -> void:
 	_polygon_points = result
 
 
-## Returns the coordinates of a ray collision position from [member Node2D.global_position]
-## of [AreaOfSight2D] to [Vector2] [param to]. If there's no collision, then returns [param to].
-## [br][b]The raycasting takes place with the usage of [method DirectSpaceState.intersect_ray][/b]
+# Returns the coordinates of a ray collision position from member Node2D.global_position
+# of AreaOfSight2D to Vector2 param to. If there's no collision, then returns param to.
+# The raycasting takes place with the usage of method DirectSpaceState.intersect_ray
 func _ray_to(to : Vector2) -> Vector2:
 	
 	if Engine.is_editor_hint():
@@ -203,10 +204,10 @@ func _ray_to(to : Vector2) -> Vector2:
 		return to
 
 
-## Iterates over all [AreaOfSight2D] in the reach area and applies [method AreaOfSight2D.sees_agent]
-## to them to update the [member AreaOfSight2D._nodes_in_area_of_sight]. [br]
-## If some agent has just entered the AOS, then emits [signal AreaOfSight2D.node_entered_area].
-## If some agent has just exited the AOS, then emits [signal AreaOfSight2D.node_exited_area].
+# Iterates over all AreaOfSight2D in the reach area and applies method AreaOfSight2D.sees_agent
+# to them to update the member AreaOfSight2D._nodes_in_area_of_sight. 
+# If some agent has just entered the AOS, then emits signal AreaOfSight2D.node_entered_area.
+# If some agent has just exited the AOS, then emits signal AreaOfSight2D.node_exited_area.
 func _check_collisions() -> void:
 	for agent in _agents_in_reach_area:
 		
@@ -224,16 +225,16 @@ func _check_collisions() -> void:
 			node_exited_area.emit(node)
 
 
-## Adds an [param agent] to [member AreaOfSight2D._agents_in_reach_area].
+# Adds an param agent to member AreaOfSight2D._agents_in_reach_area.
 func _add_to_reach_area_list(agent : Area2D) -> void:
-	if agent is AreaOfSightAgent2D and agent != _parent_agent:
+	if agent is AreaOfSightAgent2D and agent != parent_agent:
 		if not agent in _agents_in_reach_area:
 			_agents_in_reach_area.append(agent)
 
 
-## Removes an [param agent] from [member AreaOfSight2D._agents_in_reach_area].
+# Removes an param agent from member AreaOfSight2D._agents_in_reach_area.
 func _remove_from_reach_area_list(agent : Area2D) -> void:
-	if agent is AreaOfSightAgent2D and agent != _parent_agent:
+	if agent is AreaOfSightAgent2D and agent != parent_agent:
 		if agent in _agents_in_reach_area:
 			_agents_in_reach_area.erase(agent)
 

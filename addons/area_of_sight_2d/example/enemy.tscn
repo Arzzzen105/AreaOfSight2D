@@ -25,6 +25,7 @@ color = Color(1, 0, 0, 1)
 polygon = PackedVector2Array(0, -8, 6, -6, 8, 0, 6, 6, 0, 8, -6, 6, -8, 0, -6, -6)
 
 [node name="CollisionPolygon2D" type="CollisionShape2D" parent="."]
+visible = false
 modulate = Color(0, 0.835294, 0.447059, 1)
 shape = SubResource("CircleShape2D_cqe7j")
 debug_color = Color(0, 0.6, 0.701961, 0.419608)
@@ -32,12 +33,11 @@ debug_color = Color(0, 0.6, 0.701961, 0.419608)
 [node name="AreaOfSight2D" type="Node2D" parent="."]
 z_as_relative = false
 script = ExtResource("1_h6l5p")
-radius = 112
-angle_deg = 135
 rays_amount = 135
+debug_color = Color(1, 0, 1, 0.101961)
 obstacle_mask = 4
 tracking_agents_mask = 1
-area_color = Color(0, 0.717647, 0.168627, 1)
+area_color = Color(0, 1, 0, 1)
 area_texture = SubResource("GradientTexture1D_c2suf")
 edge_color = Color(0, 0, 0, 1)
 edge_width = 1.0
