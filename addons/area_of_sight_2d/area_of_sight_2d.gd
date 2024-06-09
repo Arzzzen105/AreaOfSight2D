@@ -211,12 +211,23 @@ func _ray_to(to : Vector2) -> Vector2:
 func _check_collisions() -> void:
 	for agent in _agents_in_reach_area:
 		
+		var has_common_bits = (agent.collision_layer & tracking_agents_mask) > 0
+		
+		if not has_common_bits:
+			_agents_in_reach_area.erase(agent)
+			
+			if agent.parent_node in _nodes_in_area_of_sight:
+				_nodes_in_area_of_sight.erase(agent.parent_node)
+				node_exited_area.emit(agent.parent_node)
+			
+			continue
+		
 		var see_agent = sees_agent(agent)
 		var node = agent.parent_node
 		
 		if not node:
 			continue
-			
+		
 		if (see_agent) and (not node in _nodes_in_area_of_sight):
 			_nodes_in_area_of_sight.append(node)
 			node_entered_area.emit(node)
