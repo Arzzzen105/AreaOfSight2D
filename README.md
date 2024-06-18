@@ -1,5 +1,5 @@
 # Description🧾
-A plugin which adds an AOS (Area of Sight) node for 2D. Often used of showing a danger area in stealth games.
+A plugin which adds an AOS (Area of Sight) node for 2D. Often used for showing a danger area in stealth games.
 ### Exapmle
 ![Example gif](https://github.com/Arzzzen105/AreaOfVision/blob/main/images/preview.gif)
 
