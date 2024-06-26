@@ -316,9 +316,8 @@ func _update_area_color(new_col : Color) -> void:
 
 
 func _update_area_texture(new_text : Texture2D) -> void:
-	if new_text:
-		area_texture = new_text
-		_area_polygon.texture = new_text
+	area_texture = new_text
+	_area_polygon.texture = new_text
 
 
 func _update_edge_color(new_col : Color) -> void:
