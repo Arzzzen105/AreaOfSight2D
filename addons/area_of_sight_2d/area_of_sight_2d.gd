@@ -175,7 +175,7 @@ func _set_points() -> void:
 		
 	for i in range(rays_amount + it):
 		var point : Vector2 = _ray_to(
-			to_global(Vector2(radius, 0).rotated(rotation - _semiangle + i * _angle_step))
+			to_global(Vector2(radius, 0).rotated(0 - _semiangle + i * _angle_step))
 		)
 		result.append(to_local(point))
 		
